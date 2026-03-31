@@ -1,6 +1,6 @@
 # 🐳 Docker Learning Project
 
-Sinh vien: Thân Hoàng Thiên Thiên
+Sinh viên: Thân Hoàng Thiên Thiên
 MSSV: 22687721
 
 ## 📌 Giới thiệu
@@ -38,7 +38,7 @@ Dự án này bao gồm các bài tập thực hành từ cơ bản đến nâng
 | 13  | `docker container prune`                | Xóa container dừng        |
 | 14  | `docker rmi <id>`                       | Xóa image                 |
 | 15  | `docker image prune -a`                 | Xóa image không dùng      |
-| 16  | `docker run -p 8080:80 nginx`           | Map port                  |
+| 16  | `docker run -d -p 8080:80 nginx`           | Map port                  |
 | 17  | `docker inspect <id>`                   | Xem chi tiết              |
 | 18  | `docker run -v mydata:/data nginx`      | Mount volume              |
 | 19  | `docker volume ls`                      | Xem volume                |
@@ -86,8 +86,8 @@ Dự án này bao gồm các bài tập thực hành từ cơ bản đến nâng
 ### Chạy:
 
 ```bash
-docker build -t bai01 .
-docker run -p 3000:3000 bai01
+docker build -t node_app .
+docker run -d -p 3000:3000 node_app
 ```
 
 ---
@@ -98,8 +98,8 @@ docker run -p 3000:3000 bai01
 * Port: `5000`
 
 ```bash
-docker build -t bai02 .
-docker run -p 5000:5000 bai02
+docker build -t flask_app .
+docker run -d -p 5000:5000 flask_app
 ```
 
 ---
@@ -109,8 +109,8 @@ docker run -p 5000:5000 bai02
 * Base image: `node:18-alpine`
 
 ```bash
-docker build -t bai03 .
-docker run -p 3000:3000 bai03
+docker build -t react_app .
+docker run -d -p 3000:3000 react_app
 ```
 
 ---
@@ -120,8 +120,8 @@ docker run -p 3000:3000 bai03
 * Base image: `nginx:latest`
 
 ```bash
-docker build -t bai04 .
-docker run -p 8080:80 bai04
+docker build -t my_nginx .
+docker run -d -p 8080:80 my_nginx
 ```
 
 ---
@@ -129,8 +129,8 @@ docker run -p 8080:80 bai04
 ## 🐹 Bài 5: Golang
 
 ```bash
-docker build -t bai05 .
-docker run -p 8080:8080 bai05
+docker build -t go_app .
+docker run -d -p 8082:8080 go_app
 ```
 
 ---
@@ -141,8 +141,8 @@ docker run -p 8080:8080 bai05
 * Tách build và runtime
 
 ```bash
-docker build -t bai06 .
-docker run -p 3000:3000 bai06
+docker build -t node_multi .
+docker run -d -p 3003:3000 node_multi
 ```
 
 ---
@@ -150,8 +150,8 @@ docker run -p 3000:3000 bai06
 ## ⚙️ Bài 7: Environment Variables
 
 ```bash
-docker build -t bai07 .
-docker run bai07
+docker build -t env_app .
+docker run env_app
 ```
 
 ---
@@ -159,8 +159,8 @@ docker run bai07
 ## 🐘 Bài 8: PostgreSQL
 
 ```bash
-docker build -t bai08 .
-docker run -e POSTGRES_PASSWORD=123456 -p 5432:5432 bai08
+docker build -t postgres_custom .
+docker exec -it <id> psql -U admin -d mydb
 ```
 
 ---
@@ -168,8 +168,9 @@ docker run -e POSTGRES_PASSWORD=123456 -p 5432:5432 bai08
 ## 🔴 Bài 9: Redis
 
 ```bash
-docker build -t bai09 .
-docker run -p 6379:6379 bai09
+docker build -t redis_custom .
+docker run -d -p 6379:6379 redis_custom
+docker exec -it c55c8e656aae redis-cli
 ```
 
 ---
@@ -177,8 +178,8 @@ docker run -p 6379:6379 bai09
 ## 🐘 Bài 10: PHP + Apache
 
 ```bash
-docker build -t bai10 .
-docker run -p 8080:80 -v $(pwd):/var/www/html bai10
+docker build -t php_app .
+docker run -d -p 8085:80 -v ${PWD}:/var/www/html --name php_container php_app
 ```
 
 ---
@@ -208,10 +209,10 @@ Sau khi hoàn thành project, bạn sẽ:
 
 ---
 
-# 🚀 Cách chạy nhanh toàn bộ project
+# 🚀 Chạy nhanh một bài
 
 ```bash
-cd bai01 && docker build -t bai01 . && docker run -p 3000:3000 bai01
+cd bai01 docker build -t node_app . docker run -p 3000:3000 node_app
 ```
 
 ---
@@ -220,13 +221,6 @@ cd bai01 && docker build -t bai01 . && docker run -p 3000:3000 bai01
 
 * Docker Desktop
 * Visual Studio Code
-
----
-
-# 👨‍💻 Tác giả
-
-* Docker Practice Project
-* Mục tiêu: học và thực hành Docker từ cơ bản đến nâng cao
 
 ---
 
