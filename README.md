@@ -71,6 +71,7 @@ Adapter Pattern cho phép chuyển đổi interface của một lớp thành int
 
 ## 📌 Mô tả
 
+<<<<<<< HEAD
 Cho phép tổ chức object theo dạng **cây (tree structure)**.
 
 ➡️ Client xử lý **leaf và composite giống nhau**
@@ -270,3 +271,6 @@ Dự án giúp nắm vững:
 * Thực hành kiến trúc phần mềm
 
 👉 Có thể mở rộng thành hệ thống thực tế trong tương lai.
+=======
+
+>>>>>>> main
