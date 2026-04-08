@@ -1,0 +1,11 @@
+server:
+  port: 8084
+spring:
+  application:
+    name: payment-service
+service:
+  order: http://localhost:8083/api/orders
+logging:
+  level:
+    com.example.paymentservice: DEBUG
+
