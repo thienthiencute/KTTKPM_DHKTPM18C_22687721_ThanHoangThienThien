@@ -1,0 +1,32 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: user-service
+  datasource:
+    url: jdbc:h2:mem:userdb
+    driverClassName: org.h2.Driver
+    username: sa
+    password: ''
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+  h2:
+    console:
+      enabled: true
+jwt:
+  secret: mySecretKeyForFoodOrderingSystem1234567890abcdefghijklmnopqrstuvwxyz
+  expiration: 86400000
+logging:
+  level:
+    root: INFO
+    com.example.userservice: DEBUG
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
