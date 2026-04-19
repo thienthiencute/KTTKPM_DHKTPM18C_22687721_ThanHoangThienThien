@@ -1,0 +1,72 @@
+@startuml
+' Tùy chỉnh giao diện
+skinparam classAttributeIconSize 0
+skinparam backgroundColor #fcfcfc
+skinparam PackageBackgroundColor #f2f2f2
+skinparam ArrowColor #2b2b2b
+
+package "fit.iuh.demo" {
+    class CompositeDemo {
+        + {static} main(args: String[])
+    }
+}
+
+package "fit.iuh.filesystem" {
+    interface FileComponent {
+        + show(indent: String)
+    }
+
+    class FileLeaf {
+        - name: String
+        + FileLeaf(name: String)
+        + show(indent: String)
+    }
+
+    class Folder {
+        - name: String
+        - children: List<FileComponent>
+        + Folder(name: String)
+        + add(component: FileComponent)
+        + remove(component: FileComponent)
+        + show(indent: String)
+    }
+}
+
+package "fit.iuh.ui" {
+    interface UIComponent {
+        + render(indent: String)
+    }
+
+    class Button {
+        - name: String
+        + Button(name: String)
+        + render(indent: String)
+    }
+
+    class Panel {
+        - name: String
+        - children: List<UIComponent>
+        + Panel(name: String)
+        + add(component: UIComponent)
+        + remove(component: UIComponent)
+        + render(indent: String)
+    }
+}
+
+' Mối quan hệ trong hệ thống Filesystem
+FileComponent <|.. FileLeaf : implements
+FileComponent <|.. Folder : implements
+Folder "1" o-- "0..*" FileComponent : contains (recursive)
+
+' Mối quan hệ trong hệ thống UI
+UIComponent <|.. Button : implements
+UIComponent <|.. Panel : implements
+Panel "1" o-- "0..*" UIComponent : contains (recursive)
+
+' Quan hệ của lớp Demo (Client)
+CompositeDemo ..> Folder : creates/uses
+CompositeDemo ..> FileLeaf : creates/uses
+CompositeDemo ..> Panel : creates/uses
+CompositeDemo ..> Button : creates/uses
+
+@enduml

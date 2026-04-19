@@ -1,0 +1,45 @@
+@startuml
+' Cấu hình hiển thị chuyên nghiệp
+skinparam classAttributeIconSize 0
+skinparam backgroundColor #fcfcfc
+skinparam PackageBackgroundColor #ffffff
+
+package "fit.iuh" {
+
+    interface JsonService {
+        + processJson(jsonData: String)
+    }
+
+    interface XmlService {
+        + processXml(xmlData: String)
+    }
+
+    class XmlSystem {
+        + getXmlData(): String
+    }
+
+    class JsonSystem {
+        + getJsonData(): String
+    }
+
+    class XmlToJsonAdapter {
+        - xmlSystem: XmlSystem
+        + XmlToJsonAdapter(xmlSystem: XmlSystem)
+        + getJsonData(): String
+    }
+
+    class JsonToXmlAdapter {
+        - jsonSystem: JsonSystem
+        + JsonToXmlAdapter(jsonSystem: JsonSystem)
+        + getXmlData(): String
+    }
+}
+
+' Các quan hệ (Relationships)
+JsonService <|.. XmlToJsonAdapter : implements
+XmlToJsonAdapter --> XmlSystem : wraps/adapts
+
+XmlService <|.. JsonToXmlAdapter : implements
+JsonToXmlAdapter --> JsonSystem : wraps/adapts
+
+@enduml
