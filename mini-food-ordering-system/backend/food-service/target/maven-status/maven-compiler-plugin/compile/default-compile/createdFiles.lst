@@ -1,0 +1,5 @@
+com\example\foodservice\model\Food.class
+com\example\foodservice\repository\FoodRepository.class
+com\example\foodservice\FoodServiceApplication.class
+com\example\foodservice\controller\FoodController.class
+com\example\foodservice\service\FoodService.class
