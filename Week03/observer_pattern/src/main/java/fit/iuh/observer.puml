@@ -1,0 +1,86 @@
+@startuml
+' Tùy chỉnh giao diện sơ đồ
+skinparam classAttributeIconSize 0
+skinparam backgroundColor #fcfcfc
+skinparam PackageBackgroundColor #f2f2f2
+skinparam ArrowColor #2b2b2b
+
+package "fit.iuh.common" {
+    interface Observer<T> {
+        + update(data: T)
+    }
+
+    interface Subject<T> {
+        + attach(o: Observer<T>)
+        + detach(o: Observer<T>)
+        + notifyObservers()
+    }
+}
+
+package "fit.iuh.stock" {
+    class Investor {
+        - name: String
+        + Investor(name: String)
+        + update(price: Double)
+    }
+
+    class Stock {
+        - investors: List<Observer<Double>>
+        - price: double
+        + attach(o: Observer<Double>)
+        + detach(o: Observer<Double>)
+        + notifyObservers()
+        + setPrice(price: double)
+    }
+}
+
+package "fit.iuh.task" {
+    class Task {
+        - members: List<Observer<String>>
+        - status: String
+        + attach(o: Observer<String>)
+        + detach(o: Observer<String>)
+        + notifyObservers()
+        + setStatus(status: String)
+    }
+
+    class Developer {
+        + update(status: String)
+    }
+
+    class Manager {
+        + update(status: String)
+    }
+
+    class Tester {
+        + update(status: String)
+    }
+}
+
+package "fit.iuh" {
+    class Main {
+        + {static} main(args: String[])
+    }
+}
+
+' Mối quan hệ trong hệ thống Stock
+Observer <|.. Investor : implements
+Subject <|.. Stock : implements
+Stock "1" o-- "*" Observer : notifies (List<Observer<Double>>)
+
+' Mối quan hệ trong hệ thống Task
+Observer <|.. Developer : implements
+Observer <|.. Manager : implements
+Observer <|.. Tester : implements
+Subject <|.. Task : implements
+Task "1" o-- "*" Observer : notifies (List<Observer<String>>)
+
+' Quan hệ của lớp Main (Client)
+Main ..> Stock : creates/uses
+Main ..> Task : creates/uses
+Main ..> Investor : creates
+Main ..> Developer : creates
+Main ..> Manager : creates
+Main ..> Tester : creates
+
+@enduml
